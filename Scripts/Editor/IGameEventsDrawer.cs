@@ -14,7 +14,19 @@ public class IGameEventsDrawer : Editor
     int arraySize = -1;
 
     public override void OnInspectorGUI()
-    {    
+    {
+        if(base.serializedObject == null)
+        {
+            base.OnInspectorGUI();
+            return; 
+        }
+
+        if(base.serializedObject.targetObject == null)
+        {
+            base.OnInspectorGUI();
+            return;
+        }
+
         if (base.serializedObject.targetObject is IGameEvents iGameEventsPre)
             this.arraySize = iGameEventsPre.GameEventValues.Length;
 
